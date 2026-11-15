@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#050505"><title>RAVN CLAN — Rocket League Freestyle</title>
+<style>
+:root{--bg:#050505;--panel:#101010;--line:#292929;--fg:#f5f5f5;--muted:#a0a0a0;--accent:#f5f5f5}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--bg);color:var(--fg);font-family:Arial,Helvetica,sans-serif}
+a{color:inherit;text-decoration:none}.wrap{width:min(1120px,92%);margin:auto}
+header{position:sticky;top:0;z-index:5;background:#050505ed;border-bottom:1px solid var(--line);backdrop-filter:blur(12px)}
+nav{height:74px;display:flex;align-items:center;justify-content:space-between}.brand{display:flex;align-items:center;gap:12px;font-weight:900;letter-spacing:.22em}.brand img{width:42px;height:42px;object-fit:contain}
+.links{display:flex;gap:24px;color:#bbb;font-size:11px;letter-spacing:.14em;text-transform:uppercase}.links a:hover{color:var(--accent)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:14px 21px;border:1px solid var(--accent);background:var(--accent);color:#050505;font-weight:900;font-size:11px;letter-spacing:.13em;text-transform:uppercase;cursor:pointer}.btn:hover{background:transparent;color:var(--fg)}.btn.ghost{background:transparent;color:var(--fg);border-color:#555}
+.hero{min-height:640px;display:grid;place-items:center;text-align:center;position:relative;overflow:hidden;border-bottom:1px solid var(--line)}.hero:before{content:"";position:absolute;width:600px;height:600px;border-radius:50%;background:var(--accent);filter:blur(190px);opacity:.045}
+.hero-inner{position:relative;padding:70px 0}.hero img{width:min(290px,64vw);display:block;margin:0 auto 22px}.eyebrow,.kicker{font-size:10px;color:var(--muted);letter-spacing:.34em;text-transform:uppercase}
+h1{font-size:clamp(48px,9vw,92px);line-height:.9;letter-spacing:.13em;margin:16px 0;font-weight:950}.tag{font-size:12px;color:var(--muted);letter-spacing:.28em;text-transform:uppercase;margin:22px 0 30px}.actions{display:flex;gap:12px;justify-content:center;flex-wrap:wrap}
+section{padding:92px 0;border-bottom:1px solid var(--line)}h2{font-size:clamp(30px,5vw,46px);letter-spacing:.08em;margin:12px 0 18px}.intro{color:var(--muted);max-width:680px;line-height:1.8;font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}.card{background:linear-gradient(145deg,#141414,#090909);border:1px solid var(--line);padding:26px;min-height:160px}.card .num{font-size:10px;color:#777;letter-spacing:.2em}.card h3{font-size:16px;letter-spacing:.12em;margin:20px 0 9px}.card p{color:#999;font-size:13px;line-height:1.7;margin:0}
+.roster{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:30px}.player{border:1px solid var(--line);background:#0d0d0d;padding:25px 15px;text-align:center}.player strong{display:block;letter-spacing:.14em;font-size:13px}.player span{display:block;color:#777;font-size:10px;letter-spacing:.16em;margin-top:9px;text-transform:uppercase}
+.join{text-align:center;background:#0b0b0b}.join .intro{margin:0 auto 26px}footer{padding:27px 0;color:#777;font-size:10px;letter-spacing:.15em;text-transform:uppercase}footer .wrap{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+.admin-fab{position:fixed;right:18px;bottom:18px;z-index:20;background:#eee;color:#080808;border:0;padding:13px 17px;font-weight:900;letter-spacing:.1em;cursor:pointer;box-shadow:0 5px 30px #000}
+#admin{display:none;position:fixed;inset:0;z-index:30;background:#080808f5;overflow:auto;padding:22px}#admin.open{display:block}.adminbox{max-width:900px;margin:20px auto;background:#111;border:1px solid #333;padding:24px}.adminhead{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.adminhead h2{font-size:25px;margin:0}.admin-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:22px}.field{display:flex;flex-direction:column;gap:7px}.field.full{grid-column:1/-1}.field label{font-size:10px;color:#aaa;letter-spacing:.12em;text-transform:uppercase}.field input,.field textarea{width:100%;background:#080808;color:#fff;border:1px solid #444;padding:11px;font:inherit}.field textarea{min-height:90px;resize:vertical}.field input[type=color]{height:44px;padding:4px}.admin-actions{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}.small{font-size:11px;color:#999;line-height:1.6}.roster-edit{border:1px solid #333;padding:12px;margin-top:8px;display:grid;grid-template-columns:1fr 1fr auto;gap:8px}.roster-edit input{min-width:0;background:#080808;color:white;border:1px solid #444;padding:9px}.danger{background:#4a1515;color:white;border:0;padding:9px 12px;cursor:pointer}.secondary{background:transparent;color:white;border:1px solid #555;padding:11px 14px;cursor:pointer}
+@media(max-width:720px){.links{display:none}.grid{grid-template-columns:1fr}.roster{grid-template-columns:repeat(2,1fr)}section{padding:70px 0}.admin-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.roster-edit{grid-template-columns:1fr}.hero{min-height:570px}}
+</style>
+</head>
+<body>
+<header><div class="wrap"><nav>
+<a class="brand" href="#home"><img id="navLogo" src="assets/ravn-logo.png" alt="RAVN"><span id="navName">RAVN</span></a>
+<div class="links"><a href="#about">About</a><a href="#roster">Roster</a><a href="#values">Values</a><a href="#join">Join us</a></div>
+<a class="btn ghost" href="#join">Join RAVN</a>
+</nav></div></header>
+<main>
+<section class="hero" id="home"><div class="hero-inner wrap">
+<img id="heroLogo" src="assets/ravn-logo.png" alt="Logo RAVN Clan">
+<div class="eyebrow" id="eyebrow">Rocket League Freestyle</div><h1 id="siteName">RAVN CLAN</h1>
+<div class="tag" id="tagline">Rise from the dark.</div>
+<div class="actions"><a class="btn" id="heroApply" href="#join">Apply now</a><a class="btn ghost" href="#roster">Discover the roster</a></div>
+</div></section>
+<section id="about"><div class="wrap"><div class="kicker" id="aboutKicker">01 / About us</div><h2 id="aboutTitle">BUILT IN THE SHADOWS.</h2><p class="intro" id="aboutText">RAVN est un clan dédié au freestyle sur Rocket League. Un espace pour progresser, partager ses meilleurs clips et représenter une identité commune : discipline, créativité et style.</p></div></section>
+<section id="roster"><div class="wrap"><div class="kicker">02 / The team</div><h2 id="rosterTitle">THE ROSTER.</h2><p class="intro" id="rosterText">Découvrez les joueurs qui représentent RAVN.</p><div class="roster" id="rosterList"></div></div></section>
+<section id="values"><div class="wrap"><div class="kicker">03 / The standard</div><h2 id="valuesTitle">MORE THAN A TAG.</h2><div class="grid" id="valuesList"></div></div></section>
+<section class="join" id="join"><div class="wrap"><div class="kicker">04 / Recruitment</div><h2 id="joinTitle">ENTER THE DARK.</h2><p class="intro" id="joinText">Tu souhaites rejoindre RAVN ? Ouvre un ticket privé sur notre Discord pour envoyer ta candidature et présenter tes clips.</p><a class="btn" id="discordButton" href="https://discord.com/" target="_blank" rel="noopener">Join our Discord</a></div></section>
+</main>
+<footer><div class="wrap"><span id="footerName">© RAVN CLAN</span><span id="footerGame">ROCKET LEAGUE FREESTYLE</span><span id="footerTag">RISE FROM THE DARK.</span></div></footer>
+<button class="admin-fab" onclick="openAdmin()">✦ ADMIN PANEL</button>
+<div id="admin" role="dialog" aria-modal="true" aria-label="Administration du site">
+<div class="adminbox">
+<div class="adminhead"><h2>RAVN / SITE ADMIN</h2><button class="secondary" onclick="closeAdmin()">FERMER ✕</button></div>
+<p class="small">Modifie le contenu et l'apparence du site ici, directement depuis cette page. Clique sur « Enregistrer » pour appliquer les changements sur ce navigateur.</p>
+<div class="admin-grid">
+<div class="field"><label>Nom du clan</label><input id="eName"></div>
+<div class="field"><label>Slogan</label><input id="eTagline"></div>
+<div class="field"><label>Texte de présentation</label><textarea id="eAbout"></textarea></div>
+<div class="field"><label>Titre de présentation</label><input id="eAboutTitle"></div>
+<div class="field"><label>Titre du roster</label><input id="eRosterTitle"></div>
+<div class="field"><label>Texte du roster</label><input id="eRosterText"></div>
+<div class="field"><label>Titre des valeurs</label><input id="eValuesTitle"></div>
+<div class="field"><label>Titre recrutement</label><input id="eJoinTitle"></div>
+<div class="field full"><label>Texte recrutement</label><textarea id="eJoinText"></textarea></div>
+<div class="field"><label>Lien d'invitation Discord</label><input id="eDiscord" placeholder="https://discord.gg/ton-invitation"></div>
+<div class="field"><label>Texte du bouton Discord</label><input id="eDiscordLabel"></div>
+<div class="field"><label>Couleur de fond</label><input type="color" id="eBg"></div>
+<div class="field"><label>Couleur du texte / accent</label><input type="color" id="eAccent"></div>
+<div class="field full"><label>Changer le logo (image)</label><input type="file" id="eLogo" accept="image/*"><span class="small">Choisis une image depuis ton appareil. Elle sera mémorisée dans ce navigateur.</span></div>
+<div class="field full"><label>Joueurs du roster</label><div id="rosterEditor"></div><button class="secondary" onclick="addPlayer()">+ Ajouter un joueur</button></div>
+<div class="field full"><label>Cartes / valeurs du clan</label><div id="valuesEditor"></div><button class="secondary" onclick="addValue()">+ Ajouter une valeur</button></div>
+</div>
+<div class="admin-actions"><button class="btn" onclick="saveAdmin()">ENREGISTRER LES MODIFICATIONS</button><button class="secondary" onclick="exportSettings()">EXPORTER LA CONFIGURATION</button><button class="secondary" onclick="resetSettings()">RÉINITIALISER</button></div>
+<p class="small" id="adminStatus" aria-live="polite"></p>
+<p class="small"><b>À savoir :</b> sur cette version statique, les changements sont enregistrés dans le navigateur utilisé. Pour publier les changements pour tous les visiteurs, il faut exporter la configuration et mettre à jour le site hébergé. Un vrai panneau multi-utilisateur avec sauvegarde serveur nécessite un hébergement avec base de données et authentification.</p>
+</div></div>
+<script>
+const defaults={
+ name:"RAVN",tagline:"Rise from the dark.",about:"RAVN est un clan dédié au freestyle sur Rocket League. Un espace pour progresser, partager ses meilleurs clips et représenter une identité commune : discipline, créativité et style.",
+ aboutTitle:"BUILT IN THE SHADOWS.",rosterTitle:"THE ROSTER.",rosterText:"Découvrez les joueurs qui représentent RAVN.",valuesTitle:"MORE THAN A TAG.",joinTitle:"ENTER THE DARK.",
+ joinText:"Tu souhaites rejoindre RAVN ? Ouvre un ticket privé sur notre Discord pour envoyer ta candidature et présenter tes clips.",
+ discord:"https://discord.com/",discordLabel:"Join our Discord",bg:"#050505",accent:"#f5f5f5",logo:"assets/ravn-logo.png",
+ players:[{name:"PLAYER 01",role:"Founder"},{name:"PLAYER 02",role:"Freestyler"},{name:"PLAYER 03",role:"Freestyler"},{name:"PLAYER 04",role:"Freestyler"}],
+ values:[{title:"CREATIVITY",text:"Développer son propre style et repousser les limites du freestyle."},{title:"PROGRESSION",text:"S'entraîner, recevoir des conseils et évoluer ensemble."},{title:"RESPECT",text:"Représenter le clan avec maturité, fair-play et entraide."}]
+};
+let data=load();
+function load(){try{return {...defaults,...JSON.parse(localStorage.getItem("ravnSiteSettings")||"{}")}}catch(e){return {...defaults}}}
+function apply(){
+ document.documentElement.style.setProperty("--bg",data.bg);document.documentElement.style.setProperty("--accent",data.accent);
+ document.body.style.background=data.bg;
+ ["navLogo","heroLogo"].forEach(id=>document.getElementById(id).src=data.logo);
+ document.getElementById("navName").textContent=data.name;document.getElementById("siteName").textContent=data.name+" CLAN";
+ document.getElementById("footerName").textContent="© "+data.name+" CLAN";document.getElementById("tagline").textContent=data.tagline;
+ document.getElementById("aboutTitle").textContent=data.aboutTitle;document.getElementById("aboutText").textContent=data.about;
+ document.getElementById("rosterTitle").textContent=data.rosterTitle;document.getElementById("rosterText").textContent=data.rosterText;
+ document.getElementById("valuesTitle").textContent=data.valuesTitle;document.getElementById("joinTitle").textContent=data.joinTitle;
+ document.getElementById("joinText").textContent=data.joinText;document.getElementById("discordButton").textContent=data.discordLabel;
+ document.getElementById("discordButton").href=data.discord||"https://discord.com/";
+ document.getElementById("footerTag").textContent=data.tagline.toUpperCase();
+ document.getElementById("rosterList").innerHTML=data.players.map(p=>`<div class="player"><strong>${esc(p.name)}</strong><span>${esc(p.role)}</span></div>`).join("");
+ document.getElementById("valuesList").innerHTML=data.values.map((v,i)=>`<article class="card"><div class="num">0${i+1}</div><h3>${esc(v.title)}</h3><p>${esc(v.text)}</p></article>`).join("");
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
+function openAdmin(){document.getElementById("admin").classList.add("open");fillAdmin()}
+function closeAdmin(){document.getElementById("admin").classList.remove("open")}
+function val(id){return document.getElementById(id).value}
+function fillAdmin(){
+ const map={eName:data.name,eTagline:data.tagline,eAbout:data.about,eAboutTitle:data.aboutTitle,eRosterTitle:data.rosterTitle,eRosterText:data.rosterText,eValuesTitle:data.valuesTitle,eJoinTitle:data.joinTitle,eJoinText:data.joinText,eDiscord:data.discord,eDiscordLabel:data.discordLabel,eBg:data.bg,eAccent:data.accent};
+ Object.entries(map).forEach(([id,v])=>document.getElementById(id).value=v);
+ renderEditors();
+}
+function renderEditors(){
+ document.getElementById("rosterEditor").innerHTML=data.players.map((p,i)=>`<div class="roster-edit"><input aria-label="Pseudo" value="${esc(p.name)}" oninput="data.players[${i}].name=this.value"><input aria-label="Rôle" value="${esc(p.role)}" oninput="data.players[${i}].role=this.value"><button class="danger" onclick="removePlayer(${i})">Supprimer</button></div>`).join("");
+ document.getElementById("valuesEditor").innerHTML=data.values.map((v,i)=>`<div class="roster-edit"><input aria-label="Titre" value="${esc(v.title)}" oninput="data.values[${i}].title=this.value"><input aria-label="Description" value="${esc(v.text)}" oninput="data.values[${i}].text=this.value"><button class="danger" onclick="removeValue(${i})">Supprimer</button></div>`).join("");
+}
+function addPlayer(){data.players.push({name:"NEW PLAYER",role:"Freestyler"});renderEditors()}
+function removePlayer(i){data.players.splice(i,1);renderEditors()}
+function addValue(){data.values.push({title:"NEW VALUE",text:"Description à modifier."});renderEditors()}
+function removeValue(i){data.values.splice(i,1);renderEditors()}
+document.getElementById("eLogo").addEventListener("change",e=>{const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=()=>{data.logo=r.result;document.getElementById("heroLogo").src=data.logo;document.getElementById("navLogo").src=data.logo};r.readAsDataURL(f)});
+function saveAdmin(){
+ Object.assign(data,{name:val("eName").trim()||"RAVN",tagline:val("eTagline"),about:val("eAbout"),aboutTitle:val("eAboutTitle"),rosterTitle:val("eRosterTitle"),rosterText:val("eRosterText"),valuesTitle:val("eValuesTitle"),joinTitle:val("eJoinTitle"),joinText:val("eJoinText"),discord:val("eDiscord"),discordLabel:val("eDiscordLabel"),bg:val("eBg"),accent:val("eAccent")});
+ try{localStorage.setItem("ravnSiteSettings",JSON.stringify(data));apply();document.getElementById("adminStatus").textContent="Modifications enregistrées dans ce navigateur."}
+ catch(e){document.getElementById("adminStatus").textContent="Stockage local saturé. Essaie avec une image de logo plus légère."}
+}
+function exportSettings(){
+ const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"}),a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download="ravn-site-config.json";a.click();URL.revokeObjectURL(a.href);
+ document.getElementById("adminStatus").textContent="Configuration exportée. Garde ce fichier pour transférer tes réglages.";
+}
+function resetSettings(){if(!confirm("Réinitialiser tous les réglages du site ?"))return;localStorage.removeItem("ravnSiteSettings");data={...defaults,players:defaults.players.map(x=>({...x})),values:defaults.values.map(x=>({...x}))};apply();fillAdmin();document.getElementById("adminStatus").textContent="Réglages réinitialisés."}
+apply();
+</script>
+</body></html>
